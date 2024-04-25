@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm//tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-8">
+    <h1 class="text-3x1 font-bold mb-8">WELCOME!</h1>
+    <h3 class="text-1  font-bold mb-8">List of Customers</h3>
+    <table class="border border-gray-500 rounded-lg overflow-hidden">
+        <thead class="bg-gray-200">
+
+    
+    <tr>
+        <table border=3></table>
+        </table>
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">First Name</th>
+            <th class="px-4 py-2">Last Name</th>
+            <th class="px-4 py-2">Address</th>
+            <th class="px-4 py-2">Age</th>
+            <th class="px-4 py-2">Phone Number</th>
+            <th class="px-4 py-2">Email</th>
+   </tr>
+</thead>
+<tbody id = "tableBody">
+
+</tbody>
+</table>
+<button class = "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Add Customers</button>
+</div>
+
+<script>
+    fetch('http://localhost/faller_recipeSharig/backend/api/', {
+        method: 'GET'
+    })
+    .then(res => {
+        return res.json();
+    })
+    .then(res => {
+        console.log(res);
+        var tblBody = document.getElementById('tableBody');
+        if(res == true){
+            location.load();
+        }
+
+        for(let i = 0; i < res.length; i ++){
+            let row ='<tr>' +
+                        '<td>' + res[i].id + '<td>' +
+                        '<td>' + res[i].first_name + '<td>' +
+                        '<td>' + res[i].last_name + '<td>' +
+                        '<td>' + res[i].address + '<td>' +
+                        '<td>' + res[i].age + '<td>' +
+                        '<td>' + res[i].phone_number + '<td>' +
+                        '<td>' + res[i].email + '<td>' +
+                        '<tr>';
+                            
+                            tblBody.innerHTML += row;
+        }
+    })
+</script>
+</body>
+</html>
